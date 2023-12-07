@@ -1,0 +1,13 @@
+.profile{
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    height: 80vh;
+    background-color: #faf7f7;
+    font-size: 35px;
+
+    padding: 28px 50px;
+}
