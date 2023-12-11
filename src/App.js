@@ -6,16 +6,14 @@ import AppRouter from './components/AppRouter';
 import Message from './components/Message/Message';
 
 function App() {
-  const [isLogged, setIsLogged] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isLogged, setIsLogged] = useState(true)
   const [isMessageOpne, setIsMessageOpen] = useState(false)
-  const [is, set] = useState(true)
 
   return (
     <BrowserRouter>
         {isMessageOpne && <Message setIsMessageOpen={setIsMessageOpen}/>}
-        <Navbar isLogged={isLogged} setIsLogged={setIsLogged} setIsOpen={setIsOpen} setIsMessageOpen={setIsMessageOpen} set={set}/>
-        <AppRouter isLogged={isLogged} setIsLogged={setIsLogged} isOpen={isOpen} is={is}/>
+        {isLogged ? <Navbar isLogged={isLogged} setIsLogged={setIsLogged} setIsMessageOpen={setIsMessageOpen}/> : null}    
+        <AppRouter isLogged={isLogged} setIsLogged={setIsLogged} />
     </BrowserRouter>
     
   );

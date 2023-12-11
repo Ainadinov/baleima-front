@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import styleNavbar from "./navbar.module.scss"
-import { LOGIN_ROUTE } from "../utils/consts";
 import { CgProfile } from "react-icons/cg";
 
-function Navbar({isLogged, setIsLogged, setIsOpen, setIsMessageOpen, set}) {
+function Navbar({isLogged, setIsLogged, setIsMessageOpen, }) {
     const handleLogout = () => {
       // Дополнительная логика выхода, например, сброс статуса авторизации
       setIsLogged(false);
@@ -13,17 +12,16 @@ function Navbar({isLogged, setIsLogged, setIsOpen, setIsMessageOpen, set}) {
       <div className={styleNavbar.navbar}>     
         {isLogged ? 
           <div className={styleNavbar.navbar__items}>
-              <button className={styleNavbar.navbar__message} onClick={()=> setIsMessageOpen(true)}>Сообщение</button>
-              <CgProfile className={styleNavbar.profile} onClick={()=>set(false)}/>
+              <Link to="/main">
+                <img src="/img/ATHKeeperLogo.png" alt="ATHKeeper" />
+              </Link>
+              <Link to="/profile">
+                  <CgProfile className={styleNavbar.profile}/>
+              </Link>
           </div> : <div></div>}        
         <div className={styleNavbar.navbar__btn}> 
-          {isLogged ? 
-                <button onClick={handleLogout}>Выйти</button> 
-                : 
-                <Link to={LOGIN_ROUTE} className={styleNavbar.link}>
-                  <button onClick={()=> setIsOpen(true)}>Логин</button>
-                </Link>
-          }
+          <button className={styleNavbar.navbar__message} onClick={()=> setIsMessageOpen(true)}>Сообщение</button>
+          {isLogged && <button onClick={handleLogout}>Выйти</button>}
           
         </div>
       </div>

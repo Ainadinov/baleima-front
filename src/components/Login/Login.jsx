@@ -1,27 +1,38 @@
 import styleLogin from "./login.module.scss"
-import React from 'react';
+import React, { useState } from 'react';
 import TelegramLoginButton from "react-telegram-login";
+import RegistForm from "./RegistForm/RegistForm";
+import LoginForm from "./LoginForm/LoginForm";
+
 
 function Login({setIsLogged, isOpen}) {
+  const [isRegistItems, setIsReigistItems] = useState(true)
 
-    const handleTelegramResponse = response => {
-      // Обработка ответа от Телеграма
-      console.log(response);
-      setIsLogged(true)
-    };
+    // const handleTelegramResponse = response => {
+    //   // Обработка ответа от Телеграма
+    //   console.log(response);
+    //   setIsLogged(true)
+    // };
 
     return (
-      <div className={styleLogin.login}>     
-        {
-        isOpen &&
-        <div className={`${styleLogin.container} ${styleLogin.fadeIn}`}> 
-          <TelegramLoginButton
-            dataOnauth={handleTelegramResponse}
-            botName="BaleimaBot"
-          />
+    <>
+      <div className={styleLogin.login}>   
+      <img src="/img/ATHKeeperLogo.png" alt="#" className={styleLogin.logo}/>  
+        <div className={`${isRegistItems ? styleLogin['container-login'] : styleLogin['container'] }`}> 
+          <div className={styleLogin.head}>
+            <div onClick={()=> setIsReigistItems(true)} className={`${styleLogin.button} ${isRegistItems ? styleLogin['login-btn'] : ''}`}  >Вход</div>
+            <div onClick={()=> setIsReigistItems(false)} className={`${styleLogin.button} ${isRegistItems ? '' : styleLogin['register-btn']}`} >Регистрация</div>
+          </div>
+          <div className={styleLogin.solid}></div>
+          {
+            isRegistItems ? 
+            <LoginForm/>
+            :
+            <RegistForm/>
+          }
         </div>  
-        }
       </div>
+    </> 
     );
   }
   

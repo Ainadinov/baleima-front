@@ -1,43 +1,26 @@
 import styleMain from "./main.module.scss"
-import React, { useState } from 'react';
+import DenseTable from "../Table/Table";
+import React, { useRef, useState } from 'react';
 
 
 const Main = () => {
-    const [tradeValue, setTradeValue] = useState();
-    const [kasValue, setKasValue] = useState(0);
     const [isButtonDisabled, setButtonDisabled] = useState(true)
-  
-    const handleTradeChange = (e) => {
-      const inputValue = parseFloat(e.target.value);
-      // Проверка на диапазон от 0.00 до 10.00
-      if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 10) {
-        setTradeValue(inputValue);
-      }
-    };
+    const [isSetting, setIsSetting] = useState(false)
+    const [settingBtn, setSettingButtons] = useState(true)
+    const [isVisibil, setVisibil] = useState(false)
+    const [dataSettings, setDataSetting] = useState({
+      order: 7,
+      marj: 0.12,
+      restart: "Off",
+    })
 
-    const handleKasChange = (e) => {
-      setKasValue(e.target.value)
-    }
+    const orderInputRef = useRef(0);
+    const marjInputRef = useRef(0);
+    const restartInputRef = useRef(0);
+  
   
     const handleTradeButtonClick = () => {
-      // Здесь можно выполнить необходимую логику для обработки значения
-      console.log('Торг с числом:', tradeValue);
-      console.log('Сумма KAS:', kasValue);
-
-      const userBalance =  getBalance() //getBalance();
-
-      // Проверка, что сумма KAS не превышает баланс пользователя
-      if (kasValue <= userBalance) {
-        console.log('Торг успешно выполнен!');
-        setButtonDisabled(!isButtonDisabled)
-      } else {
-        console.log('Недостаточно средств для торговли.');
-      }
-    };
-
-    const getBalance = () => {
-
-      return 1000;
+      setButtonDisabled(!isButtonDisabled)
     };
     
     const handleStopButtonClick = () => {
@@ -45,33 +28,69 @@ const Main = () => {
       setButtonDisabled(!isButtonDisabled)
     };
 
+    const handleIsSetting = () =>{
+      if(settingBtn){
+        setIsSetting(!isSetting)
+      }
+    }
+
+    const handleSettingBtn = () => {
+
+      const newOrder = orderInputRef.current !== null && orderInputRef.current.value !== '' ? parseFloat(orderInputRef.current.value) : dataSettings.order;
+      const newMarj = marjInputRef.current !== null && marjInputRef.current.value !== '' ? parseFloat(marjInputRef.current.value) : dataSettings.marj;
+
+      if (!settingBtn) {
+        setDataSetting({
+          order: newOrder,
+          marj: newMarj,
+          restart: isVisibil ? restartInputRef.current.innerText : dataSettings.restart,
+        });
+      }
+      setVisibil(!isVisibil);
+      setSettingButtons(!settingBtn);
+    };
+
+    const handleSettingBackBtn = () =>{
+      setVisibil(!isVisibil)
+      setSettingButtons(!settingBtn)
+      setDataSetting(dataSettings)
+    }
+
     return (
-      <div className={styleMain.main}>     
-            <div className={styleMain.torg}>
-              <span> Введите сумму: </span>
-              <input
-                type="number"
-                step="1"
-                min="0"
-                max="1000"
-                value={kasValue}
-                onChange={handleKasChange}
-              />
-            </div>
-            <div className={styleMain.torg}>
-              <span> Цена продажи: </span>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                max="10"
-                value={tradeValue}
-                onChange={handleTradeChange}
-              />
-            </div>
-            <button  disabled={!isButtonDisabled} onClick={handleTradeButtonClick}>Торговать</button>
-            <button disabled={isButtonDisabled} onClick={handleStopButtonClick}>Стоп</button>
-    </div>
+      <div className={styleMain.main}>    
+        <div className={styleMain.items}> 
+            <div className={styleMain.btn}>
+              <button  disabled={!isButtonDisabled} onClick={handleTradeButtonClick}>Торговать</button>
+              <button onClick={handleIsSetting}>Параметры</button>
+              <button disabled={isButtonDisabled} onClick={handleStopButtonClick}>Стоп</button>
+            </div> 
+
+            { isSetting 
+                && 
+              <div className={styleMain.settings}>
+                <div className={styleMain.setting__items}>
+                    <div><span>Сумма ордера: {dataSettings.order} $</span> {isVisibil && <input type="number" ref={orderInputRef} />}</div> 
+                    <div><span>Маржа: {dataSettings.marj} %</span> {isVisibil && <input type="number" ref={marjInputRef} />}</div>
+                    <div><span>Рестарт: {dataSettings.restart}</span> {isVisibil && <button ref={restartInputRef}>Off</button>}</div>
+                </div>
+                <div className={styleMain.settings__btn}>
+                  {
+                  settingBtn ?   
+                  <button onClick={handleSettingBtn}>Изменить</button> 
+                    :
+                    <div>
+                      <button onClick={handleSettingBtn}>Сохранить</button>
+                      <button onClick={handleSettingBackBtn}>Отмена</button>
+                    </div>
+                  
+                  }
+                
+                </div>
+              </div>  
+            }    
+        </div>  
+          <DenseTable/>
+      </div>
     );
   }
   
