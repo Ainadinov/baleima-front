@@ -1,5 +1,5 @@
 import axios from "axios";
-import styleRegistForm from "./registForm.module.scss"
+import styleRegistForm from "./registForm.module.scss";
 import React, { useState } from 'react';
 
 const RegistForm = () => {
@@ -7,73 +7,105 @@ const RegistForm = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
-
-  // const handleRegister = () => {
-  //   // const url = "be2c-2-135-137-238.ngrok-free.app/registration";
-  //   const bodyFitch = {username: "User", password: "123456"}
-
-  //   // fetch ("https://be2c-2-135-137-238.ngrok-free.app/api/v1/user/registration", {
-  //   //   method: 'POST',
-  //   //   body: JSON.stringify(bodyFitch),
-  //   //   headers: {
-  //   //     'Content-Type': 'application/json'
-  //   //     }
-  //   //   })
-  //   //     .then((response) => {
-  //   //       console.log(response);
-  //   //       return response.json();
-  //   //     })
-  //   //     .then(data => console.log(data))
-  //   //     .catch(error => console.log('Error:', error));
-
-  //   axios.post('https://39f7-2-135-137-238.ngrok-free.app/api/v1/registration', {
-  //     username: 'nurlan',
-  //     password: 'qwerty123456'
-  //   })
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  //   };
+  const [usernameError, setUsernameError] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordConfirmationError, setPasswordConfirmationError] = useState(false);
+  const [formError, setFormError] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
 
     if (!username || !login || !password || !passwordConfirmation) {
-      alert("Пожалуйста, заполните все поля формы.");
+      setFormError(true);
+      setUsernameError(!username);
+      setLoginError(!login);
+      setPasswordError(!password);
+      setPasswordConfirmationError(!passwordConfirmation);
       return;
     }
 
     if (password !== passwordConfirmation) {
-      alert("Пароли не совпадают");
+      setFormError(true);
+      setPasswordError(true);
+      setPasswordConfirmationError(true);
       return;
     }
 
+    axios.post('http://185.100.67.120/api/v1/user/registration', {
+      first_name: username,
+      username: login,
+      phone_number: " ",
+      password: password,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    setFormError(false);
   };
 
   return (
-  <>
+    <>
+      <form onSubmit={handleRegister} className={styleRegistForm.form}>
+        {formError && <p className={styleRegistForm.errorMessage}>Заполните все поля формы и убедитесь, что пароли совпадают.</p>}
 
-    <form onSubmit={handleRegister} className={styleRegistForm.form}>
-      <span>Имя:</span>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Имя" />
+        <span>Имя:</span>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
+            setUsernameError(false);
+            setFormError(false);
+          }}
+          placeholder="Имя"
+          className={usernameError ? styleRegistForm.error : ''}
+        />
 
-      <span>Логин:</span>
-        <input type="text" value={login} onChange={(e) => setLogin(e.target.value)} placeholder="Логин" />
+        <span>Логин:</span>
+        <input
+          type="text"
+          value={login}
+          onChange={(e) => {
+            setLogin(e.target.value);
+            setLoginError(false);
+            setFormError(false);
+          }}
+          placeholder="Логин"
+          className={loginError ? styleRegistForm.error : ''}
+        />
 
-      <span>Пароль:</span>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <span>Пароль:</span>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setPasswordError(false);
+            setFormError(false);
+          }}
+          className={passwordError ? styleRegistForm.error : ''}
+        />
 
-      <span>Повторите пароль:</span>
-        <input type="password" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)}/>
+        <span>Повторите пароль:</span>
+        <input
+          type="password"
+          value={passwordConfirmation}
+          onChange={(e) => {
+            setPasswordConfirmation(e.target.value);
+            setPasswordConfirmationError(false);
+            setFormError(false);
+          }}
+          className={passwordConfirmationError ? styleRegistForm.error : ''}
+        />
 
-      <button type="submit">Регистрация</button>
-    </form>
-
-  </>
+        <button type="submit">Регистрация</button>
+      </form>
+    </>
   );
 };
 

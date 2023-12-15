@@ -16,7 +16,7 @@ const Main = () => {
 
     const orderInputRef = useRef(0);
     const marjInputRef = useRef(0);
-    const restartInputRef = useRef(0);
+    const restartInputRef = useRef(false);
   
   
     const handleTradeButtonClick = () => {

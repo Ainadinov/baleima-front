@@ -5,7 +5,7 @@ import RegistForm from "./RegistForm/RegistForm";
 import LoginForm from "./LoginForm/LoginForm";
 
 
-function Login({setIsLogged, isOpen}) {
+function Login({setIsLogged, isOpen, setToken}) {
   const [isRegistItems, setIsReigistItems] = useState(true)
 
     // const handleTelegramResponse = response => {
@@ -26,7 +26,7 @@ function Login({setIsLogged, isOpen}) {
           <div className={styleLogin.solid}></div>
           {
             isRegistItems ? 
-            <LoginForm/>
+            <LoginForm setIsLogged={setIsLogged} setToken={setToken}/>
             :
             <RegistForm/>
           }
