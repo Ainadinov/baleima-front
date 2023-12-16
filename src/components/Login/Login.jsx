@@ -17,13 +17,12 @@ function Login({setIsLogged, isOpen, setToken}) {
     return (
     <>
       <div className={styleLogin.login}>   
-      <img src="/img/ATHKeeperLogo.png" alt="#" className={styleLogin.logo}/>  
+        <img src="/img/ATHKeeperLogo.png" alt="#" className={styleLogin.logo}/>  
         <div className={`${isRegistItems ? styleLogin['container-login'] : styleLogin['container'] }`}> 
           <div className={styleLogin.head}>
             <div onClick={()=> setIsReigistItems(true)} className={`${styleLogin.button} ${isRegistItems ? styleLogin['login-btn'] : ''}`}  >Вход</div>
             <div onClick={()=> setIsReigistItems(false)} className={`${styleLogin.button} ${isRegistItems ? '' : styleLogin['register-btn']}`} >Регистрация</div>
           </div>
-          <div className={styleLogin.solid}></div>
           {
             isRegistItems ? 
             <LoginForm setIsLogged={setIsLogged} setToken={setToken}/>

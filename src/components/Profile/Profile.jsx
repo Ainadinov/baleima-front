@@ -1,18 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styleProfile from "./profile.module.scss"
 import axios from "axios";
 
-function Profile({token}) {
+function Profile() {
+  const [user, setUser] = useState('')
+  const [apiKey, setApiKey] = useState("");
+  const [secretKey, setSecretKey] = useState("");
+
+  const getTokenFromLocalStorage = () => {
+    return localStorage.getItem('accessToken');
+  };
 
   useEffect(()=>{
-    axios.get('http://185.100.67.120/api/v1/user/profile',{
+    
+    axios.get('https://athkeeper.com/api/v1/user/profile',{
       headers: {
-        "Authorization" : `Token ${token}` 
+        "Authorization" : `Token ${getTokenFromLocalStorage()}` 
       }
     })
       .then(function (response) {
         // handle success
-        console.log(response);
+        console.log(response.data.user);
+        setUser(response.data.user)
       })
       .catch(function (error) {
         // handle error
@@ -23,16 +32,57 @@ function Profile({token}) {
       })
   }, [])
 
+  const sendMexcKeys = (event) =>{
+    event.preventDefault();
+
+    axios.put('https://athkeeper.com/api/v1/user/profile', { mexc_api_key: apiKey, mexc_secret_key: secretKey }, {
+        headers: {
+          'Authorization': `Token ${getTokenFromLocalStorage()}`,
+          'Content-Type': 'application/json', 
+        },
+      })
+        .then(response => {
+          console.log('Success:', response.data);
+          setApiKey("")
+          setSecretKey("")
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Обработка ошибок
+        });
+  }
+  /// Exist
+
     return (
       <div className={styleProfile.profile}>
         <div className={styleProfile.user}>
-          
+          <div className={styleProfile.info}>My info</div>
+          <div><span className={styleProfile.first_child}>Имя:</span> <span className={styleProfile.second_child}>{user.first_name}</span></div>
+          <div><span className={styleProfile.first_child}>Логин:</span> <span className={styleProfile.second_child}>{user.username}</span></div>
+          <div><span className={styleProfile.first_child}>Почта:</span> <span className={styleProfile.second_child}>{user.email}</span></div>
+          <div><span className={styleProfile.first_child}>Сумма ордера:</span> <span className={styleProfile.second_child}>{user.trade_percent} %</span></div>
+          <div><span className={styleProfile.first_child}>Маржа:</span> <span className={styleProfile.second_child}>{user.trade_usdt_quantity} $</span></div>
         </div>
-        <form className={styleProfile.key}>
-          <div><span>Api Key</span><input></input></div>
-          <div><span>Key Secret</span><input></input></div>         
-          <button>Отправить</button>
-        </form>
+
+      <form className={styleProfile.key} onSubmit={sendMexcKeys}>
+        <div>
+          <span>Mexc Api Key</span>
+          <input
+            type="text"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+          />
+        </div>
+        <div>
+          <span>Mexc Secret Key</span>
+          <input
+            type="text"
+            value={secretKey}
+            onChange={(e) => setSecretKey(e.target.value)}
+          />
+        </div>
+        <button type="submit">Отправить</button>
+      </form>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 .profile{
     display: flex;
-    flex-direction: row; 
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     gap: 20px;
@@ -12,4 +12,171 @@
     padding: 28px 50px;
 
 
+    .info{
+        color: #3C4242;
+
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 33.5px;
+        letter-spacing: 0.56px;
+    }
+
+    .user{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .first_child{
+            color: #807D7E;
+
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .second_child{
+            display: flex;
+            width: 382px;
+            padding: 16px 20px;
+            align-items: center;
+            gap: 12px;
+            border-radius: 8px;
+            background: #ffff;
+            color: #3C4242;
+
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+
+            border-bottom: 1px solid #EDEEF2;
+        }
+
+        div{
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+    }
+
+
+    .key {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        div {
+            display: flex;
+            flex-direction: column;
+
+          span {
+            color: #807D7E;
+
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+          input {
+            width: 382px;
+            padding: 8px;
+          }
+        }
+      
+        button {
+            display: flex;
+            height: 44px;
+            width: 150px;
+            padding: 12px 12px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 18px; 
+            color: #FDFDFD;
+            border: 1.5px solid #3498db;
+            background: #3498db;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+    
+            
+            &:hover {
+                border: 1.5px solid #3498db;
+                background-color: transparent;
+                color: #3498db;
+                text-decoration: none;
+            }
+    
+            &:disabled {
+                background: lightgray;
+                color: darkgray;
+                cursor: not-allowed;
+                border: 1.5px solid lightgray;
+              }
+        } 
+    }
+}
+
+
+@media (max-width: 560px) {
+    .profile{
+
+        .info{
+            font-size: 22px;
+        }
+
+        .user{
+            .first_child{
+    
+                font-size: 14px;
+            }
+
+            .second_child{
+                width: 300px;
+                padding: 12px 15px;
+    
+                font-size: 14px;
+
+            }
+    
+        }
+
+        .key {
+             div {
+                 span {
+                    font-size: 14px;
+                }
+                 input {
+                    width: 300px;
+                    padding: 8px;
+                }
+            }
+            
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .profile{
+        .user{
+            .second_child{
+                width: 260px;
+
+            }
+    
+        }
+
+        .key {
+             div {
+                 input {
+                    width: 260px;
+                }
+            }
+        }
+    }
 }

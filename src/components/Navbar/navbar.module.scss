@@ -10,20 +10,22 @@
     margin-top: 35px;
     padding: 28px 50px;
 
+    img{
+        width: 130px;
+        height: 60px;
+
+        cursor: pointer;
+    }
+
     .navbar__items{
         display: flex;
-        flex-direction: row;
-        gap: 15px;
         align-items: center;
-
-        img{
-            width: 100px;
-            height: 45px;
-
-            cursor: pointer;
-        }
+        gap: 15px;
 
         .profile{
+            display: flex;
+            align-items: center;
+
             width: 45px;
             height: 45px;
             color: #3498db;
@@ -34,7 +36,37 @@
     
             cursor: pointer;
         }
-    
+
+        button {
+            display: flex;
+            height: 44px;
+            padding: 12px 28px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            
+            border-radius: 57px;
+            
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px; 
+            color: #FDFDFD;
+            border: 1.5px solid #3498db;
+            background: #3498db;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+
+            
+            &:hover {
+                border: 1.5px solid #3498db;
+                background-color: transparent;
+                color: #3498db;
+                text-decoration: none;
+            }
+        } 
+
+
         .navbar__message{
             display: flex;
             height: 44px;
@@ -64,49 +96,37 @@
 
     }
 
+}
+
+@media (max-width: 500px){
+    .navbar{
+        margin-top: 0;
+
+        padding: 20px 20px;
+    }
+}
+
+@media (max-width: 400px){
+    .navbar{
+
+        padding: 15px 15px;
+
+        img{
+            width: 115px;
+            height: 55px;
     
-
-    .navbar__btn{
-        display: flex;
-        align-items: flex-end;
-        column-gap: 10px;
-        
-        .link{
-            text-decoration: none;
-            
-            &:hover{
-                text-decoration: none;
-            }
         }
-        
-        button {
-            display: flex;
-            height: 44px;
-            padding: 12px 28px;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            
-            border-radius: 57px;
-            
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 24px; 
-            color: #FDFDFD;
-            border: 1.5px solid #3498db;
-            background: #3498db;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
 
-            
-            &:hover {
-                border: 1.5px solid #3498db;
-                background-color: transparent;
-                color: #3498db;
-                text-decoration: none;
-            }
-        } 
-        
+        .navbar__items{
+            gap: 7px;
+
+            button {
+                font-size: 12px;
+                line-height: 16px;
+
+                padding: 12px 15px;
+                border-radius: 15px;
+            } 
+        }
     }
 }

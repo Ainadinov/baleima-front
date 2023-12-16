@@ -166,3 +166,69 @@ $loginColor: #3498db;
     }
 
 }
+
+@media (max-width: 580px){
+  .logo{
+    width: 350px;
+  }
+
+  .login{
+    .container-login{
+      
+      padding: 10px 20px;
+  
+      width: 370px;
+    }
+
+    .container{
+      padding: 10px 20px;
+  
+      width: 370px;
+  
+    }
+
+  }
+
+}
+
+@media (max-width: 430px){
+
+  .login{
+    .container-login{
+      
+      padding: 10px 20px;
+  
+      width: 310px;
+    }
+
+    .container{
+      padding: 10px 20px;
+  
+      width: 310px;
+      
+    }
+
+  }
+
+}
+
+@media (max-width: 375px){
+
+  .login{
+    .container-login{
+      
+      padding: 10px 20px;
+  
+      width: 270px;
+    }
+
+    .container{
+      padding: 10px 20px;
+  
+      width: 270px;
+
+    }
+
+  }
+
+}

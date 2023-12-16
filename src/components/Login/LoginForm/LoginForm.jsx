@@ -2,7 +2,13 @@ import axios from "axios";
 import styleLoginForm from "./loginForm.module.scss";
 import React, { useState } from 'react';
 
-const LoginForm = ({setIsLogged, setToken}) => {
+
+const saveTokenToLocalStorage = (token) => {
+  localStorage.setItem('accessToken', token);
+};
+
+
+const LoginForm = ({ setIsLogged, setToken }) => {
   const [islogin, setLogin] = useState('');
   const [ispassword, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
@@ -13,32 +19,34 @@ const LoginForm = ({setIsLogged, setToken}) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (!islogin || !ispassword) { 
-      setLoginError(!islogin); 
-      setPasswordError(!ispassword); 
+    if (!islogin || !ispassword) {
+      setLoginError(!islogin);
+      setPasswordError(!ispassword);
       return;
     }
 
-    axios.post('http://185.100.67.120/api/v1/user/api-token-auth', {
+    axios.post('https://athkeeper.com/api/v1/user/api-token-auth', {
       username: islogin,
       password: ispassword
     })
-    .then(function (response) {
-      setToken(response.data.token);
-      setIsLogged(true)
-    })
-    .catch(function (error) {
-      console.log(error.data);
-      setError('Неверный логин или пароль');
-      setAllError(true)
-    });
+      .then(function (response) {
+        // Сохранение токена в LocalStorage
+        saveTokenToLocalStorage(response.data.token);
 
+        setIsLogged(true);
+      })
+      .catch(function (error) {
+        // Обработка ошибок
+        console.log(error.response.data);
+        setError('Неверный логин или пароль');
+        setAllError(true);
+      });
   };
 
   return (
     <form onSubmit={handleLogin} className={styleLoginForm.form}>
       <p className={styleLoginForm.errorMessage}>
-        {loginError || passwordError  ? "Пожалуйста, введите логин и пароль." : ""}
+        {loginError || passwordError ? "Пожалуйста, введите логин и пароль." : ""}
       </p>
       {error && <p className={styleLoginForm.errorMessage}>{error}</p>}
 
@@ -48,7 +56,7 @@ const LoginForm = ({setIsLogged, setToken}) => {
         value={islogin}
         onChange={(e) => {
           setLogin(e.target.value);
-          setLoginError(false); 
+          setLoginError(false);
           setError('');
           setAllError(false);
         }}

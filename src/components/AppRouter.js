@@ -4,7 +4,7 @@ import { privateRoutes, profileRoutes, publicRoutes } from "./routes";
 import { LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE } from "./utils/consts";
 
 
-const AppRouter = ({isLogged, setIsLogged, setToken, token}) => {
+const AppRouter = ({isLogged, setIsLogged, }) => {
 
     return isLogged ? 
     ( 
@@ -15,7 +15,7 @@ const AppRouter = ({isLogged, setIsLogged, setToken, token}) => {
           <Route path="*" element={<Navigate to={MAIN_ROUTE} />} />
 
           {profileRoutes.map(({path, Component})=>
-            <Route key={path} path={path} element={<Component token={token}/>}/>
+            <Route key={path} path={path} element={<Component/>}/>
           )}
             <Route path="*" element={<Navigate to={PROFILE_ROUTE} />} />
         </Routes>
@@ -24,7 +24,7 @@ const AppRouter = ({isLogged, setIsLogged, setToken, token}) => {
     (
         <Routes>
           {publicRoutes.map(({path, Component})=>
-            <Route key={path} path={path} element={<Component setIsLogged={setIsLogged} setToken={setToken}/>}/>
+            <Route key={path} path={path} element={<Component setIsLogged={setIsLogged} />}/>
           )}
             <Route path="*" element={<Navigate to={LOGIN_ROUTE} />} />
         </Routes>
