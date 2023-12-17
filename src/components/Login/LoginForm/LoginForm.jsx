@@ -25,7 +25,7 @@ const LoginForm = ({ setIsLogged, setToken }) => {
       return;
     }
 
-    axios.post('http://195.210.47.72/api/v1/user/api-token-auth', {
+    axios.post('https://admin.athkeeper.com/api/v1/user/api-token-auth', {
       username: islogin,
       password: ispassword
     })

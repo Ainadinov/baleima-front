@@ -24,7 +24,7 @@ const DenseTable = () => {
   };
 
   const fetchData = () => {
-    axios.get(`http://195.210.47.72/api/v1/trade/trade-info?page=${currentPage}&page_size=${pageSize}`,{
+    axios.get(`https://admin.athkeeper.com/api/v1/trade/trade-info?page=${currentPage}&page_size=${pageSize}`,{
       headers: {
         "Authorization" : `Token ${getTokenFromLocalStorage()}` 
       }
