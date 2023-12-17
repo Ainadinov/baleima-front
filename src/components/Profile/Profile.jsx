@@ -13,7 +13,7 @@ function Profile() {
 
   useEffect(()=>{
     
-    axios.get('https://admin.athkeeper.com/api/v1/user/profile',{
+    axios.get('https://api.athkeeper.com/api/v1/user/profile',{
       headers: {
         "Authorization" : `Token ${getTokenFromLocalStorage()}` 
       }
@@ -35,7 +35,7 @@ function Profile() {
   const sendMexcKeys = (event) =>{
     event.preventDefault();
 
-    axios.put('https://admin.athkeeper.com/api/v1/user/profile', { mexc_api_key: apiKey, mexc_secret_key: secretKey }, {
+    axios.put('https://api.athkeeper.com/api/v1/user/profile', { mexc_api_key: apiKey, mexc_secret_key: secretKey }, {
         headers: {
           'Authorization': `Token ${getTokenFromLocalStorage()}`,
           'Content-Type': 'application/json', 

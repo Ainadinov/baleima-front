@@ -32,7 +32,7 @@ const RegistForm = () => {
       return;
     }
 
-    axios.post('https://admin.athkeeper.com/api/v1/user/registration', {
+    axios.post('https://api.athkeeper.com/api/v1/user/registration', {
       first_name: username,
       username: login,
       phone_number: " ",
