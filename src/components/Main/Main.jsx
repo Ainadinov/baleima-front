@@ -22,7 +22,7 @@ const Main = () => {
     };
 
     const getProfile = () => {
-      axios.get('https://api.athkeeper.com/api/v1/user/profile',{
+      axios.get('http://195.210.47.72/api/v1/user/profile',{
         headers: {
           "Authorization" : `Token ${getTokenFromLocalStorage()}` 
         }
@@ -48,7 +48,7 @@ const Main = () => {
 
 
     const handleTradeButtonClick = () => {
-      axios.post('https://api.athkeeper.com/api/v1/trade/start-trade', null, {
+      axios.post('http://195.210.47.72/api/v1/trade/start-trade', null, {
         headers: {
           "Authorization": `Token ${getTokenFromLocalStorage()}`
         }
@@ -63,7 +63,7 @@ const Main = () => {
     };
     
     const handleStopButtonClick = () => {
-      axios.post('https://api.athkeeper.com/api/v1/trade/stop-trade', null, {
+      axios.post('http://195.210.47.72/api/v1/trade/stop-trade', null, {
         headers: {
           "Authorization": `Token ${getTokenFromLocalStorage()}`
         }
@@ -94,7 +94,7 @@ const Main = () => {
         trade_percent: newMarj,
       };
       
-      axios.put('https://api.athkeeper.com/api/v1/user/profile', requestData, {
+      axios.put('http://195.210.47.72/api/v1/user/profile', requestData, {
         headers: {
           'Authorization': `Token ${getTokenFromLocalStorage()}`,
         },
