@@ -1,6 +1,7 @@
 import axios from "axios";
 import styleLoginForm from "./loginForm.module.scss";
 import React, { useState } from 'react';
+import { MEXC_URL } from "../../utils/consts";
 
 
 const saveTokenToLocalStorage = (token) => {
@@ -25,7 +26,7 @@ const LoginForm = ({ setIsLogged, setToken }) => {
       return;
     }
 
-    axios.post('http://195.210.47.72/api/v1/user/api-token-auth', {
+    axios.post(`${MEXC_URL}/api/v1/user/api-token-auth`, {
       username: islogin,
       password: ispassword
     })
@@ -37,7 +38,6 @@ const LoginForm = ({ setIsLogged, setToken }) => {
       })
       .catch(function (error) {
         // Обработка ошибок
-        console.log(error.response.data);
         setError('Неверный логин или пароль');
         setAllError(true);
       });

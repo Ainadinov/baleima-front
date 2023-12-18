@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styleTable from "./table.module.scss"
+import { MEXC_URL } from '../utils/consts';
 
 const DenseTable = () => {
   const [rows, setRows] = useState([]);
@@ -24,19 +25,17 @@ const DenseTable = () => {
   };
 
   const fetchData = () => {
-    axios.get(`http://195.210.47.72/api/v1/trade/trade-info?page=${currentPage}&page_size=${pageSize}`,{
+    axios.get(`${MEXC_URL}/api/v1/trade/trade-info?page=${currentPage}&page_size=${pageSize}`,{
       headers: {
         "Authorization" : `Token ${getTokenFromLocalStorage()}` 
       }
     })
       .then(function (response) {
         // handle success
-        console.log(response.data.detail);
-        setRows(response.data.detail)
+        setRows(response.data.results.detail)
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
       })
       .finally(function () {
         // always executed
@@ -59,12 +58,15 @@ const DenseTable = () => {
     <div>
       <table className={styleTable.table}>
         <thead>
+          <tr className={styleTable.myorders}>
+            <th colSpan="5">My orders</th>
+          </tr>
           <tr>
-            <th>Количество</th>
+            <th>KAS</th>
             <th>Buy</th>
             <th>Sell</th>
             <th>Profit</th>
-            <th>Время</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import styleRegistForm from "./registForm.module.scss";
 import React, { useState } from 'react';
+import { MEXC_URL } from "../../utils/consts";
 
 const RegistForm = () => {
   const [username, setUsername] = useState('');
@@ -12,9 +13,12 @@ const RegistForm = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordConfirmationError, setPasswordConfirmationError] = useState(false);
   const [formError, setFormError] = useState(false);
+  const [userRep, setUserRep] = useState(false);
+  const [userCorrect, setUserCorrect] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
+
 
     if (!username || !login || !password || !passwordConfirmation) {
       setFormError(true);
@@ -32,17 +36,26 @@ const RegistForm = () => {
       return;
     }
 
-    axios.post('http://195.210.47.72/api/v1/user/registration', {
+    axios.post(`${MEXC_URL}/api/v1/user/registration`, {
       first_name: username,
       username: login,
       phone_number: " ",
       password: password,
     })
     .then(function (response) {
-      console.log(response);
+      setUserCorrect(true)
+      setUserRep(false)
+      setUsername("")
+      setLogin("")
+      setPassword("")
+      setPasswordConfirmation("")
     })
     .catch(function (error) {
-      console.log(error);
+
+      if(error.response.data.username[0]){
+        setLoginError(true);
+        setUserRep(true)
+      }
     });
 
     setFormError(false);
@@ -52,6 +65,8 @@ const RegistForm = () => {
     <>
       <form onSubmit={handleRegister} className={styleRegistForm.form}>
         {formError && <p className={styleRegistForm.errorMessage}>Заполните все поля формы и убедитесь, что пароли совпадают.</p>}
+        {userRep && <p className={styleRegistForm.errorMessage}>Пользователь с таким логином уже существует.</p>}
+        {userCorrect && <p className={styleRegistForm.correctMessage}>Вы успешно зарегистрировались!</p>}
 
         <span>Имя:</span>
         <input

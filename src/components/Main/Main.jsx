@@ -2,6 +2,7 @@ import styleMain from "./main.module.scss"
 import DenseTable from "../Table/Table";
 import React, { useEffect, useRef, useState } from 'react';
 import axios from "axios";
+import { MEXC_URL } from "../utils/consts";
 
 
 
@@ -22,19 +23,17 @@ const Main = () => {
     };
 
     const getProfile = () => {
-      axios.get('http://195.210.47.72/api/v1/user/profile',{
+      axios.get(`${MEXC_URL}/api/v1/user/profile`,{
         headers: {
           "Authorization" : `Token ${getTokenFromLocalStorage()}` 
         }
       })
         .then(function (response) {
-          console.log(response.data)
           setButtonDisabled(response.data.user.auto_trade)
           setDataSetting({order: response.data.user.trade_usdt_quantity, marj: response.data.user.trade_percent})
         })
         .catch(function (error) {
           // handle error
-          console.log(error);
         })
         .finally(function () {
           // always executed
@@ -48,32 +47,28 @@ const Main = () => {
 
 
     const handleTradeButtonClick = () => {
-      axios.post('http://195.210.47.72/api/v1/trade/start-trade', null, {
+      axios.post(`${MEXC_URL}/api/v1/trade/start-trade`, null, {
         headers: {
           "Authorization": `Token ${getTokenFromLocalStorage()}`
         }
       })
         .then(function (response) {
-          console.log(response);
           getProfile()
         })
         .catch(function (error) {
-          console.log(error);
         });
     };
     
     const handleStopButtonClick = () => {
-      axios.post('http://195.210.47.72/api/v1/trade/stop-trade', null, {
+      axios.post(`${MEXC_URL}/api/v1/trade/start-trade`, null, {
         headers: {
           "Authorization": `Token ${getTokenFromLocalStorage()}`
         }
       })
         .then(function (response) {
-          console.log(response);
           setButtonDisabled(!isButtonDisabled)
         })
         .catch(function (error) {
-          console.log(error);
         });
     };
 
@@ -94,17 +89,15 @@ const Main = () => {
         trade_percent: newMarj,
       };
       
-      axios.put('http://195.210.47.72/api/v1/user/profile', requestData, {
+      axios.put(`${MEXC_URL}/api/v1/user/profile`, requestData, {
         headers: {
           'Authorization': `Token ${getTokenFromLocalStorage()}`,
         },
       })
         .then(response => {
-          console.log('Success:', response.data);
           // Обработка успешного ответа
         })
         .catch(error => {
-          console.error('Error:', error.response);
           // Обработка ошибок
         });
 

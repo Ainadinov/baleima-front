@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import styleProfile from "./profile.module.scss"
 import axios from "axios";
+import { MEXC_URL } from "../utils/consts";
+
+
 
 function Profile() {
   const [user, setUser] = useState('')
@@ -13,19 +16,17 @@ function Profile() {
 
   useEffect(()=>{
     
-    axios.get('http://195.210.47.72/api/v1/user/profile',{
+    axios.get(`${MEXC_URL}/api/v1/user/profile`,{
       headers: {
         "Authorization" : `Token ${getTokenFromLocalStorage()}` 
       }
     })
       .then(function (response) {
         // handle success
-        console.log(response.data.user);
         setUser(response.data.user)
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
       })
       .finally(function () {
         // always executed
@@ -35,25 +36,24 @@ function Profile() {
   const sendMexcKeys = (event) =>{
     event.preventDefault();
 
-    axios.put('http://195.210.47.72/api/v1/user/profile', { mexc_api_key: apiKey, mexc_secret_key: secretKey }, {
+    axios.put(`${MEXC_URL}/api/v1/user/profile`, { mexc_api_key: apiKey, mexc_secret_key: secretKey }, {
         headers: {
           'Authorization': `Token ${getTokenFromLocalStorage()}`,
           'Content-Type': 'application/json', 
         },
       })
         .then(response => {
-          console.log('Success:', response.data);
           setApiKey("")
           setSecretKey("")
         })
         .catch(error => {
-          console.error('Error:', error);
           // Обработка ошибок
         });
   }
   /// Exist
 
     return (
+      <>
       <div className={styleProfile.profile}>
         <div className={styleProfile.user}>
           <div className={styleProfile.info}>My info</div>
@@ -84,6 +84,8 @@ function Profile() {
         <button type="submit">Отправить</button>
       </form>
       </div>
+      </>
+
     );
   }
   

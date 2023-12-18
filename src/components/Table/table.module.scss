@@ -1,7 +1,13 @@
+
 .table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+
+    .myorders{
+        font-size: 20px;
+        font-weight: 600;
+    }
 
     th{
         background-color: #3498db;
