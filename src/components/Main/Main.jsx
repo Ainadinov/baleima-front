@@ -60,7 +60,7 @@ const Main = () => {
     };
     
     const handleStopButtonClick = () => {
-      axios.post(`${MEXC_URL}/api/v1/trade/start-trade`, null, {
+      axios.post(`${MEXC_URL}/api/v1/trade/stop-trade`, null, {
         headers: {
           "Authorization": `Token ${getTokenFromLocalStorage()}`
         }
