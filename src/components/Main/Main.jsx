@@ -3,6 +3,7 @@ import DenseTable from "../Table/Table";
 import React, { useEffect, useRef, useState } from 'react';
 import axios from "axios";
 import { MEXC_URL } from "../utils/consts";
+import MainInfo from "./MainInfo/MainInfo";
 
 
 
@@ -13,6 +14,8 @@ const Main = () => {
     const [settingBtn, setSettingButtons] = useState(true)
     const [isVisibil, setVisibil] = useState(false)
     const [dataSettings, setDataSetting] = useState({})
+
+    const [rows, setRows] = useState([]);
 
     const orderInputRef = useRef(0);
     const marjInputRef = useRef(0);
@@ -54,8 +57,11 @@ const Main = () => {
       })
         .then(function (response) {
           getProfile()
+          alert(response.data.detail)
         })
         .catch(function (error) {
+          console.log(error)
+          alert(error.response.data.detail)
         });
     };
     
@@ -67,6 +73,7 @@ const Main = () => {
       })
         .then(function (response) {
           setButtonDisabled(!isButtonDisabled)
+          alert(response.data.detail)
         })
         .catch(function (error) {
         });
@@ -123,6 +130,8 @@ const Main = () => {
     }
 
     return (
+    <>
+      <MainInfo rows={rows}/>
       <div className={styleMain.main}>    
         <div className={styleMain.items}> 
             <div className={styleMain.btn}>
@@ -155,8 +164,10 @@ const Main = () => {
               </div>  
             }    
         </div>  
-          <DenseTable/>
+          <DenseTable rows={rows} setRows={setRows}/>
       </div>
+    </>
+
     );
   }
   

@@ -5,11 +5,10 @@
     align-items: center;
     gap: 20px;
 
-    height: 80vh;
+    height: 70vh;
     background-color: #faf7f7;
     font-size: 35px;
 
-    margin-top: 15px;
     padding: 28px 50px;
 
 
@@ -100,16 +99,16 @@
             font-weight: 600;
             line-height: 18px; 
             color: #FDFDFD;
-            border: 1.5px solid #3498db;
-            background: #3498db;
+            border: 1.5px solid #14c9f1;
+            background: #14c9f1;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
     
             
             &:hover {
-                border: 1.5px solid #3498db;
+                border: 1.5px solid #14c9f1;
                 background-color: transparent;
-                color: #3498db;
+                color: #14c9f1;
                 text-decoration: none;
             }
     
@@ -126,6 +125,7 @@
 
 @media (max-width: 560px) {
     .profile{
+        margin-top: 10px;
 
         .info{
             font-size: 22px;

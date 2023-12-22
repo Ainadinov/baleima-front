@@ -51,7 +51,7 @@ const RegistForm = () => {
       setPasswordConfirmation("")
     })
     .catch(function (error) {
-
+      console.log(error)
       if(error.response.data.username[0]){
         setLoginError(true);
         setUserRep(true)

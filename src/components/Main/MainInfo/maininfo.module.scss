@@ -1,0 +1,84 @@
+.info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 5px 50px;
+
+    .price{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 5px;
+        
+
+        .icons{
+            position: absolute;
+
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+    
+            .kas{
+                position: absolute;
+                top: 10px;
+                left: -5px;
+                z-index: 1;
+            }
+    
+            .usdt{
+                position: absolute;
+                top: -5px;
+                left: 13px;
+                z-index: 0;
+            }
+        }
+
+        .kas__usdt{
+            // margin-left: 65px;
+
+            p{
+                font-family: 'EB Garamond', serif;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                
+
+                &:first-child{
+                    font-weight: 600;
+                    color: #14c9f1;
+                }
+            }
+        }
+       
+    }
+
+    .balance{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        font-family: 'EB Garamond', serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        color: #14c9f1;
+
+        span{
+            padding-left: 4px;
+            font-weight: 500;
+            color: black;
+
+        }
+    }
+}
+
+@media (max-width: 500px){
+    .info{   
+        align-items: normal;
+        padding: 5px 20px 5px 30px;
+    }
+}

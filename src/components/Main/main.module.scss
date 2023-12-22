@@ -1,3 +1,4 @@
+
 .main{
     display: flex;
     flex-direction: row; 
@@ -5,7 +6,7 @@
     align-items: center;
     gap: 40px;
 
-    height: 80vh;
+    height: 60vh;
     background-color: #faf7f7;
 
     padding: 28px 50px;
@@ -38,16 +39,16 @@
             font-weight: 600;
             line-height: 24px; 
             color: #FDFDFD;
-            border: 1.5px solid #3498db;
-            background: #3498db;
+            border: 1.5px solid #14c9f1;
+            background: #14c9f1;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
     
             
             &:hover {
-                border: 1.5px solid #3498db;
+                border: 1.5px solid #14c9f1;
                 background-color: transparent;
-                color: #3498db;
+                color: #14c9f1;
                 text-decoration: none;
             }
     
@@ -142,16 +143,16 @@
                 font-weight: 500;
                 line-height: 18px; 
                 color: #FDFDFD;
-                border: 1.5px solid #3498db;
-                background: #3498db;
+                border: 1.5px solid #14c9f1;
+                background: #14c9f1;
                 cursor: pointer;
                 transition: background-color 0.3s, color 0.3s;
         
                 
                 &:hover {
-                    border: 1.5px solid #3498db;
+                    border: 1.5px solid #14c9f1;
                     background-color: transparent;
-                    color: #3498db;
+                    color: #14c9f1;
                     text-decoration: none;
                 }
             }
@@ -166,13 +167,25 @@
         flex-direction: column; 
         justify-content: space-evenly;
         align-items: center;
-        gap: 40px;
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 470px){
+    .main{
+        justify-content: space-between;
+        gap: 15px;
+        height: 75vh;
+
     }
 }
 
 @media (max-width: 430px){
     .main{
-
+        justify-content: space-between;
+        gap: 10px;
+        
         .items{
             margin-top: 25px;
             gap: 10px;
@@ -189,14 +202,15 @@
     }
 }
 
+
 @media (max-width: 360px){
-    .main{
+
         .main{
             display: flex;
             flex-direction: column; 
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
         }
 
         .items{
@@ -204,12 +218,26 @@
         }
 
         .btn{
-            button {
-                width: 80px;
-                padding: 8px 12px;
-                
-                font-size: 12px;     
-            } 
+            gap: 15px; 
         }
-    }
+}
+
+@media (max-width: 320px){
+        .main{
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            padding: 10px 50px;
+        }
+
+        .items{
+            gap: 10px;
+        }
+
+        .btn{
+            gap: 10px; 
+        }
 }

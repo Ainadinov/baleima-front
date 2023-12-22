@@ -3,8 +3,7 @@ import axios from 'axios';
 import styleTable from "./table.module.scss"
 import { MEXC_URL } from '../utils/consts';
 
-const DenseTable = () => {
-  const [rows, setRows] = useState([]);
+const DenseTable = ({rows, setRows}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5; // Установите желаемый размер страницы
 

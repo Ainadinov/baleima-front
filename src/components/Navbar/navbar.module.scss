@@ -7,7 +7,6 @@
 
     background-color: #faf7f7;
 
-    margin-top: 35px;
     padding: 28px 50px;
 
     img{
@@ -28,7 +27,7 @@
 
             width: 45px;
             height: 45px;
-            color: #3498db;
+            color: #14c9f1;
     
             border-radius: none;
             background-color: #ffff;
@@ -52,16 +51,16 @@
             font-weight: 700;
             line-height: 24px; 
             color: #FDFDFD;
-            border: 1.5px solid #3498db;
-            background: #3498db;
+            border: 1.5px solid #14c9f1;
+            background: #14c9f1;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
 
             
             &:hover {
-                border: 1.5px solid #3498db;
+                border: 1.5px solid #14c9f1;
                 background-color: transparent;
-                color: #3498db;
+                color: #14c9f1;
                 text-decoration: none;
             }
         } 
@@ -82,15 +81,15 @@
             font-weight: 700;
             line-height: 24px; 
             color: #FDFDFD;
-            border: 1.5px solid #3498db;
-            background: #3498db;
+            border: 1.5px solid #14c9f1;
+            background: #14c9f1;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
     
             &:hover {
-                border: 1.5px solid #3498db;
+                border: 1.5px solid #14c9f1;
                 background-color: transparent;
-                color: #3498db;
+                color: #14c9f1;
             }
         }
 

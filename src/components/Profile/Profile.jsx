@@ -60,8 +60,8 @@ function Profile() {
           <div><span className={styleProfile.first_child}>Имя:</span> <span className={styleProfile.second_child}>{user.first_name}</span></div>
           <div><span className={styleProfile.first_child}>Логин:</span> <span className={styleProfile.second_child}>{user.username}</span></div>
           <div><span className={styleProfile.first_child}>Почта:</span> <span className={styleProfile.second_child}>{user.email}</span></div>
-          <div><span className={styleProfile.first_child}>Сумма ордера:</span> <span className={styleProfile.second_child}>{user.trade_percent} %</span></div>
-          <div><span className={styleProfile.first_child}>Маржа:</span> <span className={styleProfile.second_child}>{user.trade_usdt_quantity} $</span></div>
+          <div><span className={styleProfile.first_child}>Сумма ордера:</span> <span className={styleProfile.second_child}>{user.trade_usdt_quantity} $</span></div>
+          <div><span className={styleProfile.first_child}>Маржа:</span> <span className={styleProfile.second_child}>{user.trade_percent} %</span></div>
         </div>
 
       <form className={styleProfile.key} onSubmit={sendMexcKeys}>
